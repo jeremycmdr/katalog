@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="bs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Katalog artikala</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./products.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="sitebar">
+      <div>
+        <p class="eyebrow">D.o.o. "Barac industry" Zvornik</p>
+        <h1>Katalog artikala</h1>
+      </div>
+      <button class="print-button" type="button" data-print>Print / PDF</button>
+    </header>
+
+    <main class="catalog-shell">
+      <section class="toolbar" aria-label="Filter kataloga">
+        <label class="search-box">
+          <span>Pretraga</span>
+          <input data-search type="search" placeholder="Sifra ili naziv artikla" />
+        </label>
+        <label class="view-box">
+          <span>Prikaz</span>
+          <select data-view>
+            <option value="catalog">Katalog</option>
+            <option value="compact">Kompaktno</option>
+          </select>
+        </label>
+        <output data-count></output>
+      </section>
+
+      <section class="print-title" aria-label="Naslov za stampu">
+        <p>D.o.o. "Barac industry" Zvornik</p>
+        <h2>Katalog artikala</h2>
+      </section>
+
+      <section class="catalog-grid" data-grid aria-live="polite"></section>
+    </main>
+  </body>
+</html>
