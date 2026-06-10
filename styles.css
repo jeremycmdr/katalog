@@ -143,8 +143,12 @@ output {
   background:
     linear-gradient(135deg, rgba(110, 143, 53, 0.16), rgba(55, 92, 117, 0.14)),
     repeating-linear-gradient(0deg, #f8f8f2 0, #f8f8f2 12px, #eef1e8 13px, #eef1e8 14px);
+  --product-image-max-height: 150px;
+  block-size: 190px;
   display: grid;
   justify-items: center;
+  min-block-size: 0;
+  overflow: hidden;
   padding: 20px;
   position: relative;
 }
@@ -179,11 +183,12 @@ output {
 
 .product-image img {
   display: block;
-  height: 100%;
-  max-height: 100%;
+  height: auto;
+  max-height: var(--product-image-max-height);
   max-width: 100%;
   object-fit: contain;
-  width: 100%;
+  object-position: center;
+  width: auto;
 }
 
 .placeholder-mark {
@@ -212,6 +217,7 @@ output {
 .product-copy {
   display: grid;
   gap: 8px;
+  min-width: 0;
   padding: 18px 18px 16px;
 }
 
@@ -262,13 +268,17 @@ output {
 }
 
 .catalog-grid[data-view="compact"] .product-card {
-  grid-template-columns: 92px 1fr;
+  grid-template-columns: 92px minmax(0, 1fr);
   grid-template-rows: auto;
   min-height: 148px;
 }
 
 .catalog-grid[data-view="compact"] .product-image {
-  min-height: 148px;
+  --product-image-max-height: 124px;
+  block-size: 148px;
+  inline-size: 92px;
+  min-block-size: 0;
+  min-height: 0;
   padding: 12px;
 }
 
@@ -354,14 +364,19 @@ output {
     grid-template-columns: none;
     grid-template-rows: 42mm auto;
     min-height: 78mm;
-    overflow: visible;
+    overflow: hidden;
     page-break-inside: avoid;
   }
 
   .product-image,
   .catalog-grid[data-view="compact"] .product-image {
-    min-height: auto;
-    padding: 6mm;
+    --product-image-max-height: 32mm;
+    block-size: 42mm;
+    inline-size: auto;
+    max-block-size: 42mm;
+    min-block-size: 0;
+    min-height: 0;
+    padding: 5mm;
   }
 
   .placeholder-mark,
