@@ -56,22 +56,12 @@ h1 {
   margin: 0;
 }
 
-.print-button,
 select,
 input {
   border: 1px solid #c9cfc1;
   border-radius: 6px;
   color: var(--ink);
   font: inherit;
-}
-
-.print-button {
-  background: var(--green-dark);
-  color: #fff;
-  cursor: pointer;
-  font-weight: 700;
-  min-height: 42px;
-  padding: 0 18px;
 }
 
 .catalog-shell {
@@ -115,10 +105,6 @@ output {
   min-height: 42px;
   padding: 12px 0 0;
   text-align: right;
-}
-
-.print-title {
-  display: none;
 }
 
 .catalog-grid {
@@ -303,122 +289,5 @@ output {
 
   output {
     text-align: left;
-  }
-}
-
-@page {
-  margin: 10mm;
-  size: A4;
-}
-
-@media print {
-  html,
-  body {
-    background: #fff;
-  }
-
-  .sitebar,
-  .toolbar {
-    display: none;
-  }
-
-  .catalog-shell {
-    max-width: none;
-    padding: 0;
-  }
-
-  .print-title {
-    align-items: baseline;
-    border-bottom: 2px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8mm;
-    padding-bottom: 4mm;
-  }
-
-  .print-title p,
-  .print-title h2 {
-    margin: 0;
-  }
-
-  .print-title h2 {
-    color: var(--green-dark);
-    font-size: 24px;
-  }
-
-  .catalog-grid,
-  .catalog-grid[data-view="compact"] {
-    display: grid;
-    gap: 7mm;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .product-card,
-  .catalog-grid[data-view="compact"] .product-card {
-    border: 0;
-    border-bottom: 1px solid #bfc7b2;
-    border-radius: 0;
-    break-inside: avoid;
-    box-shadow: none;
-    display: grid;
-    grid-template-columns: none;
-    grid-template-rows: 42mm auto;
-    min-height: 78mm;
-    overflow: hidden;
-    page-break-inside: avoid;
-  }
-
-  .product-image,
-  .catalog-grid[data-view="compact"] .product-image {
-    --product-image-max-height: 32mm;
-    block-size: 42mm;
-    inline-size: auto;
-    max-block-size: 42mm;
-    min-block-size: 0;
-    min-height: 0;
-    padding: 5mm;
-  }
-
-  .placeholder-mark,
-  .catalog-grid[data-view="compact"] .placeholder-mark {
-    font-size: 28px;
-    width: 24mm;
-  }
-
-  .placeholder-caption {
-    bottom: 4mm;
-    display: block;
-    font-size: 9px;
-  }
-
-  .product-copy {
-    gap: 2.5mm;
-    padding: 4mm 0 0;
-  }
-
-  .category {
-    font-size: 9px;
-  }
-
-  .product-copy h2 {
-    font-size: 14px;
-    line-height: 1.18;
-  }
-
-  .description {
-    font-size: 10px;
-    line-height: 1.25;
-  }
-
-  .meta-line {
-    padding-top: 2.5mm;
-  }
-
-  .meta-line strong {
-    font-size: 12px;
-  }
-
-  .meta-line span {
-    font-size: 10px;
   }
 }

@@ -2,7 +2,6 @@ const grid = document.querySelector("[data-grid]");
 const searchInput = document.querySelector("[data-search]");
 const viewSelect = document.querySelector("[data-view]");
 const countOutput = document.querySelector("[data-count]");
-const printButton = document.querySelector("[data-print]");
 
 const categoryRules = [
   { key: "coatings", label: "Premazi", words: ["CAPA", "PU-", "LATEX", "DIAMONDS", "INDEKO", "DUPA", "PF ", "BOTAMENT"] },
@@ -62,6 +61,5 @@ function render() {
 
 searchInput.addEventListener("input", render);
 viewSelect.addEventListener("change", render);
-printButton.addEventListener("click", () => window.print());
 
 render();
