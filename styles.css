@@ -40,6 +40,10 @@ body {
   z-index: 10;
 }
 
+.brand-block {
+  min-width: 0;
+}
+
 .eyebrow {
   color: var(--muted);
   font-size: 13px;
@@ -54,6 +58,28 @@ h1 {
   font-size: 30px;
   line-height: 1.05;
   margin: 0;
+}
+
+.contact-info {
+  color: var(--muted);
+  display: grid;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  gap: 4px;
+  justify-items: end;
+  line-height: 1.35;
+  min-width: min(360px, 100%);
+  text-align: right;
+}
+
+.contact-info a {
+  color: var(--green-dark);
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
 }
 
 select,
@@ -281,6 +307,12 @@ output {
   .sitebar {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .contact-info {
+    justify-items: start;
+    min-width: 0;
+    text-align: left;
   }
 
   .toolbar {
