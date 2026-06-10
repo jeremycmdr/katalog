@@ -167,6 +167,25 @@ output {
     repeating-linear-gradient(90deg, #f8f8f2 0, #f8f8f2 16px, #eef1e8 17px, #eef1e8 18px);
 }
 
+.product-card .product-image--filled {
+  background: #fff;
+  border-bottom: 1px solid #eef0e8;
+}
+
+.product-card .product-image--empty {
+  background: #f6f7f1;
+  border-bottom: 1px solid #eef0e8;
+}
+
+.product-image img {
+  display: block;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
 .placeholder-mark {
   align-items: center;
   aspect-ratio: 1;

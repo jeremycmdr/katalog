@@ -4,8 +4,6 @@ const viewSelect = document.querySelector("[data-view]");
 const countOutput = document.querySelector("[data-count]");
 const printButton = document.querySelector("[data-print]");
 
-const placeholderText = "Kratki opis artikla - placeholder za buduce specifikacije, dimenzije i napomene.";
-
 const categoryRules = [
   { key: "coatings", label: "Premazi", words: ["CAPA", "PU-", "LATEX", "DIAMONDS", "INDEKO", "DUPA", "PF ", "BOTAMENT"] },
   { key: "tools", label: "Alat", words: ["VALJAK", "CETK", "SPAKLA", "MISTRIJA", "GLETARICA", "TELESKOP", "PISTOLJ", "MJESAC"] },
@@ -21,15 +19,12 @@ function getCategory(product) {
   };
 }
 
-function initials(name) {
-  return name
-    .replace(/[()+.,]/g, " ")
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
+function imageContent(product) {
+  if (!product.image) {
+    return "";
+  }
+
+  return `<img src="${product.image}" alt="${product.name}" />`;
 }
 
 function productCard(product) {
@@ -37,14 +32,13 @@ function productCard(product) {
   const article = document.createElement("article");
   article.className = `product-card product-card--${category.key}`;
   article.innerHTML = `
-    <div class="product-image" aria-label="Placeholder slika artikla">
-      <span class="placeholder-mark">${initials(product.name)}</span>
-      <span class="placeholder-caption">Slika artikla</span>
+    <div class="product-image ${product.image ? "product-image--filled" : "product-image--empty"}" aria-label="${product.image ? `Slika artikla ${product.name}` : "Slika nije dostupna"}">
+      ${imageContent(product)}
     </div>
     <div class="product-copy">
       <p class="category">${category.label}</p>
       <h2>${product.name}</h2>
-      <p class="description">${placeholderText}</p>
+      <p class="description">${product.description || ""}</p>
       <div class="meta-line">
         <strong>Sifra: ${product.code}</strong>
         <span>JM: ${product.unit}</span>
