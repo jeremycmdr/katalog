@@ -62,24 +62,20 @@ h1 {
 
 .contact-info {
   color: var(--muted);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  gap: 4px;
-  justify-items: end;
+  gap: 3px;
+  align-items: flex-end;
   line-height: 1.35;
   min-width: min(360px, 100%);
   text-align: right;
 }
 
-.contact-info a {
-  color: var(--green-dark);
-  text-decoration: none;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
+.contact-info > * {
+  display: block;
 }
 
 select,
@@ -307,10 +303,12 @@ output {
   .sitebar {
     align-items: stretch;
     flex-direction: column;
+    gap: 8px;
   }
 
   .contact-info {
-    justify-items: start;
+    align-items: flex-start;
+    gap: 2px;
     min-width: 0;
     text-align: left;
   }
