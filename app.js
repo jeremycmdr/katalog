@@ -18,12 +18,26 @@ function getCategory(product) {
   };
 }
 
+function placeholderContent(product) {
+  return `
+    <span class="placeholder-mark" aria-hidden="true">${product.code}</span>
+    <span class="placeholder-caption">Slika nije dostupna</span>
+  `;
+}
+
 function imageContent(product) {
   if (!product.image) {
-    return "";
+    return placeholderContent(product);
   }
 
-  return `<img src="${product.image}" alt="${product.name}" />`;
+  return `<img src="${product.image}" alt="${product.name}" loading="lazy" decoding="async" />`;
+}
+
+function showPlaceholder(imageBox, product) {
+  imageBox.classList.remove("product-image--filled");
+  imageBox.classList.add("product-image--empty");
+  imageBox.setAttribute("aria-label", "Slika nije dostupna");
+  imageBox.innerHTML = placeholderContent(product);
 }
 
 function productCard(product) {
@@ -44,6 +58,11 @@ function productCard(product) {
       </div>
     </div>
   `;
+
+  const imageBox = article.querySelector(".product-image");
+  const image = imageBox.querySelector("img");
+  image?.addEventListener("error", () => showPlaceholder(imageBox, product), { once: true });
+
   return article;
 }
 
