@@ -40,6 +40,18 @@ function showPlaceholder(imageBox, product) {
   imageBox.innerHTML = placeholderContent(product);
 }
 
+function getOrderNumber(product) {
+  const orderNumber = Number(product.orderNumber);
+  return Number.isFinite(orderNumber) ? orderNumber : Number.MAX_SAFE_INTEGER;
+}
+
+function sortByOrderNumber(products) {
+  return products
+    .map((product, index) => ({ product, index }))
+    .sort((a, b) => getOrderNumber(a.product) - getOrderNumber(b.product) || a.index - b.index)
+    .map(({ product }) => product);
+}
+
 function productCard(product) {
   const category = getCategory(product);
   const article = document.createElement("article");
@@ -68,10 +80,10 @@ function productCard(product) {
 
 function render() {
   const query = searchInput.value.trim().toUpperCase();
-  const products = window.PRODUCTS.filter((product) => {
+  const products = sortByOrderNumber(window.PRODUCTS.filter((product) => {
     const haystack = `${product.code} ${product.name} ${product.unit}`.toUpperCase();
     return haystack.includes(query);
-  });
+  }));
 
   grid.dataset.view = viewSelect.value;
   grid.replaceChildren(...products.map(productCard));
