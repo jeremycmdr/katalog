@@ -23,6 +23,7 @@ html {
 }
 
 body {
+  font-size: 18px;
   margin: 0;
 }
 
@@ -33,7 +34,7 @@ body {
   display: flex;
   gap: 24px;
   justify-content: space-between;
-  min-height: 84px;
+  min-height: 96px;
   padding: 16px max(24px, 5vw);
   position: sticky;
   top: 0;
@@ -46,7 +47,7 @@ body {
 
 .eyebrow {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0;
   margin: 0 0 4px;
@@ -55,16 +56,34 @@ body {
 
 h1 {
   color: var(--green-dark);
-  font-size: 30px;
+  font-size: 44px;
   line-height: 1.05;
   margin: 0;
+}
+
+.catalog-link {
+  color: var(--blue);
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 8px;
+  text-decoration: none;
+}
+
+.catalog-link:hover {
+  text-decoration: underline;
+}
+
+.catalog--selected h1,
+.catalog--selected .product-copy h2 {
+  color: var(--blue);
 }
 
 .contact-info {
   color: var(--muted);
   display: flex;
   flex-direction: column;
-  font-size: 14px;
+  font-size: 19px;
   font-style: normal;
   font-weight: 700;
   gap: 3px;
@@ -109,7 +128,7 @@ input {
 .search-box span,
 .view-box span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -117,7 +136,7 @@ input {
 input,
 select {
   background: #fff;
-  min-height: 42px;
+  min-height: 48px;
   padding: 0 12px;
 }
 
@@ -139,7 +158,6 @@ output {
   background: var(--surface);
   border: 1px solid #e1e4d8;
   border-radius: 8px;
-  box-shadow: var(--shadow);
   display: grid;
   grid-template-rows: 190px 1fr;
   min-height: 372px;
@@ -199,6 +217,7 @@ output {
   max-width: 100%;
   object-fit: contain;
   object-position: center;
+  transform: scale(1.28);
   width: auto;
 }
 
@@ -209,7 +228,7 @@ output {
   border-radius: 6px;
   color: var(--muted);
   display: flex;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 700;
   height: 52px;
   justify-content: center;
@@ -218,7 +237,7 @@ output {
 
 .placeholder-caption {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -230,17 +249,9 @@ output {
   padding: 18px 18px 16px;
 }
 
-.category {
-  color: var(--amber);
-  font-size: 12px;
-  font-weight: 700;
-  margin: 0;
-  text-transform: uppercase;
-}
-
 .product-copy h2 {
   color: var(--green-dark);
-  font-size: 20px;
+  font-size: 28px;
   line-height: 1.16;
   margin: 0;
   overflow-wrap: anywhere;
@@ -248,7 +259,7 @@ output {
 
 .description {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.35;
   margin: 0;
 }
@@ -264,12 +275,12 @@ output {
 }
 
 .meta-line strong {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .meta-line span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 17px;
 }
 
 .catalog-grid[data-view="compact"] {
@@ -292,7 +303,7 @@ output {
 }
 
 .catalog-grid[data-view="compact"] .placeholder-mark {
-  font-size: 12px;
+  font-size: 14px;
   height: 36px;
   width: 52px;
 }
@@ -321,5 +332,97 @@ output {
 
   output {
     text-align: left;
+  }
+}
+
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+@media print {
+  .sitebar {
+    align-items: start;
+    display: grid;
+    gap: 8mm;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 0;
+    padding: 0 0 6mm;
+    position: static;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .eyebrow,
+  .contact-info {
+    font-size: 11pt;
+  }
+
+  h1 {
+    font-size: 24pt;
+  }
+
+  .catalog-link {
+    display: none;
+  }
+
+  .contact-info {
+    align-items: flex-end;
+    min-width: 0;
+  }
+
+  .catalog-shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  .toolbar {
+    display: none;
+  }
+
+  .catalog-grid {
+    display: grid;
+    gap: 4mm;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    margin-top: 5mm;
+  }
+
+  .product-card {
+    break-inside: avoid;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 28mm auto;
+    min-height: 0;
+    page-break-inside: avoid;
+  }
+
+  .product-image {
+    --product-image-max-height: 25mm;
+    block-size: 28mm;
+    padding: 2mm;
+  }
+
+  .product-copy {
+    gap: 1.5mm;
+    padding: 2mm;
+  }
+
+  .product-copy h2 {
+    font-size: 11pt;
+  }
+
+  .description {
+    font-size: 9pt;
+  }
+
+  .meta-line {
+    margin-top: 1mm;
+    padding-top: 1.5mm;
+  }
+
+  .meta-line strong,
+  .meta-line span {
+    font-size: 9pt;
   }
 }

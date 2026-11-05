@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="bs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Katalog odabranih artikala</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./products.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body class="catalog--selected">
+    <header class="sitebar">
+      <div class="brand-block">
+        <p class="eyebrow">D.o.o. "Barac industry" Zvornik</p>
+        <h1>Katalog artikala</h1>
+        <a class="catalog-link" href="./index.html">Katalog sa svim artiklima</a>
+      </div>
+      <address class="contact-info" aria-label="Kontakt informacije">
+        <span>+387 65 243 847</span>
+        <span>baracindustry@gmail.com</span>
+        <span>Ulice 3/7, Zvornik, Bosna i Hercegovina 75400</span>
+      </address>
+    </header>
+
+    <main class="catalog-shell">
+      <section class="toolbar" aria-label="Filter kataloga">
+        <label class="search-box">
+          <span>Pretraga</span>
+          <input data-search type="search" placeholder="Sifra ili naziv artikla" />
+        </label>
+        <label class="view-box">
+          <span>Prikaz</span>
+          <select data-view>
+            <option value="catalog">Katalog</option>
+            <option value="compact">Kompaktno</option>
+          </select>
+        </label>
+        <output data-count></output>
+      </section>
+
+      <section
+        class="catalog-grid"
+        data-grid
+        data-codes="1,2,3,4,5,6,7,8,48,49,145,146,33,35,37,148,22,16,17,18,15,19,12,39,32,53,23,147,38,13,24,25,20,21,34,14,36,40,41,26,27,28,29,30,31,42,43,44,45,46,47,11,9,10,50,51,52,54,55"
+        aria-live="polite"
+      ></section>
+    </main>
+  </body>
+</html>
