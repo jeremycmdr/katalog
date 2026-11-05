@@ -4,18 +4,15 @@ const viewSelect = document.querySelector("[data-view]");
 const countOutput = document.querySelector("[data-count]");
 
 const categoryRules = [
-  { key: "coatings", label: "Premazi", words: ["CAPA", "PU-", "LATEX", "DIAMONDS", "INDEKO", "DUPA", "PF ", "BOTAMENT"] },
-  { key: "tools", label: "Alat", words: ["VALJAK", "CETK", "SPAKLA", "MISTRIJA", "GLETARICA", "TELESKOP", "PISTOLJ", "MJESAC"] },
-  { key: "materials", label: "Materijal", words: ["TRAKA", "KVARC", "GLASPERLEN", "FOLIJA", "MREZICA", "KANTA", "KADICA"] },
-  { key: "services", label: "Usluga", words: ["USLUGA", "UGRADNJA", "INJEKTIRANJE"] },
+  { key: "coatings", words: ["CAPA", "PU-", "LATEX", "DIAMONDS", "INDEKO", "DUPA", "PF ", "BOTAMENT"] },
+  { key: "tools", words: ["VALJAK", "CETK", "SPAKLA", "MISTRIJA", "GLETARICA", "TELESKOP", "PISTOLJ", "MJESAC"] },
+  { key: "materials", words: ["TRAKA", "KVARC", "GLASPERLEN", "FOLIJA", "MREZICA", "KANTA", "KADICA"] },
+  { key: "services", words: ["USLUGA", "UGRADNJA", "INJEKTIRANJE"] },
 ];
 
 function getCategory(product) {
   const name = product.name.toUpperCase();
-  return categoryRules.find((rule) => rule.words.some((word) => name.includes(word))) || {
-    key: "construction",
-    label: "Gradjevinski program",
-  };
+  return categoryRules.find((rule) => rule.words.some((word) => name.includes(word)))?.key || "construction";
 }
 
 function placeholderContent(product) {
@@ -55,13 +52,12 @@ function sortByOrderNumber(products) {
 function productCard(product) {
   const category = getCategory(product);
   const article = document.createElement("article");
-  article.className = `product-card product-card--${category.key}`;
+  article.className = `product-card product-card--${category}`;
   article.innerHTML = `
     <div class="product-image ${product.image ? "product-image--filled" : "product-image--empty"}" aria-label="${product.image ? `Slika artikla ${product.name}` : "Slika nije dostupna"}">
       ${imageContent(product)}
     </div>
     <div class="product-copy">
-      <p class="category">${category.label}</p>
       <h2>${product.name}</h2>
       <p class="description">${product.description || ""}</p>
       <div class="meta-line">
@@ -80,10 +76,15 @@ function productCard(product) {
 
 function render() {
   const query = searchInput.value.trim().toUpperCase();
-  const products = sortByOrderNumber(window.PRODUCTS.filter((product) => {
+  const selectedCodes = grid.dataset.codes?.split(",").map((code) => code.trim()).filter(Boolean);
+  const codeOrder = selectedCodes ? new Map(selectedCodes.map((code, index) => [code, index])) : null;
+  const filteredProducts = window.PRODUCTS.filter((product) => {
     const haystack = `${product.code} ${product.name} ${product.unit}`.toUpperCase();
-    return haystack.includes(query);
-  }));
+    return (!codeOrder || codeOrder.has(String(product.code))) && haystack.includes(query);
+  });
+  const products = codeOrder
+    ? filteredProducts.sort((a, b) => codeOrder.get(String(a.code)) - codeOrder.get(String(b.code)))
+    : sortByOrderNumber(filteredProducts);
 
   grid.dataset.view = viewSelect.value;
   grid.replaceChildren(...products.map(productCard));
