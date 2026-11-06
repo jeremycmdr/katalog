@@ -341,6 +341,21 @@ output {
 }
 
 @media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  .pdf-cover-page {
+    background: #fff !important;
+    box-sizing: border-box;
+    min-height: 273mm;
+  }
+
+  .catalog-shell {
+    background: var(--paper) !important;
+  }
+
   .sitebar {
     align-items: start;
     display: grid;
